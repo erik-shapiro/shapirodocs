@@ -1,0 +1,5 @@
+site_name: Shapiro Documentation
+
+nav:
+- 'index.md'
+- 'Ocean Insights/about.md'
