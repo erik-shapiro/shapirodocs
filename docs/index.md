@@ -9,7 +9,7 @@
 
 ## Ports America
 
-* [Check OI data](https://shapiro360.shapiro.com/index.php/run-app?app=ocean-insights-request-mbl)
+
 
 
 ## Hub 360
@@ -17,6 +17,7 @@
 
 ##Regen The WSDL
 
+* [How to regen the WSDL](regenwsdl)
 
 
 ##Database Changes

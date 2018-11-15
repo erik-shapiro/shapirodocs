@@ -1,8 +1,11 @@
-1.	Make sure that you compile any programs that you want added to the WSDL
+1.	Make sure that you compile any programs that you want added to the WSDL</br>
+![](regenwsdlimgs/winscplogo.png)
 2.	Login to Shap-exp-360pro for Production or Shap-exp-360dev for Development.
 3.	Launch WinSCP
-4.	Move over the .r files, of the programs you complied in Step 1 (See below for the directory names)
-5.	Launch the proxy generator
+4.	Move over the .r files, of the programs you complied in Step 1 (See below for the directory names)</br>
+![](regenwsdlimgs/regen2img.png)
+5.	Launch the proxy generator</br>
+![](regenwsdlimgs/proxygen.png)
 6.	Hit the folder icon and navigate to C:\shapiro360 and chose ShapiroProd or ShapiroDev
 7.	The hit Procedure->Add->Non-Persistent 
 8.	Hit save and then hit   to generate the WSDL

@@ -4,14 +4,14 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="None">
         
         
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Shapiro Documentation</title>
-        <link href="css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Regenwsdl - Shapiro Documentation</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -19,13 +19,13 @@
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <script src="js/jquery-1.10.2.min.js" defer></script>
-        <script src="js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
 
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
@@ -39,18 +39,18 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href=".">Shapiro Documentation</a>
+                    <a class="navbar-brand" href="..">Shapiro Documentation</a>
                 </div>
 
                 <!-- Expanded navigation -->
                 <div class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="active">
-                                <a href=".">Shapiro MIS Documentation</a>
+                            <li >
+                                <a href="..">Shapiro MIS Documentation</a>
                             </li>
                             <li >
-                                <a href="Ocean Insights/about/">About</a>
+                                <a href="../Ocean Insights/about/">About</a>
                             </li>
                         </ul>
 
@@ -60,16 +60,6 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li class="disabled">
-                                <a rel="next" >
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li >
-                                <a rel="prev" href="Ocean Insights/about/">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
                     </ul>
                 </div>
             </div>
@@ -78,38 +68,32 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#shapiro-mis-documentation">Shapiro MIS Documentation</a></li>
-            <li><a href="#ocean-insights">Ocean Insights</a></li>
-            <li><a href="#ports-america">Ports America</a></li>
-            <li><a href="#hub-360">Hub 360</a></li>
-            <li><a href="#regen-the-wsdl">Regen The WSDL</a></li>
-            <li><a href="#database-changes">Database Changes</a></li>
-            <li><a href="#reset-the-demons">Reset The Demons</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="shapiro-mis-documentation">Shapiro MIS Documentation</h1>
-<h2 id="ocean-insights">Ocean Insights</h2>
-<ul>
-<li>
-<p><a href="https://shapiro360.shapiro.com/index.php/run-app?app=ocean-insights-request-mbl">Check OI data</a></p>
-</li>
-<li>
-<p><a href="https://shapiro360.shapiro.com/index.php/run-app?app=ocean-insights-request-mbl">OI API Data</a></p>
-</li>
-</ul>
-<h2 id="ports-america">Ports America</h2>
-<ul>
-<li><a href="https://shapiro360.shapiro.com/index.php/run-app?app=ocean-insights-request-mbl">Check OI data</a></li>
-</ul>
-<h2 id="hub-360">Hub 360</h2>
-<ul>
-<li>test</li>
-</ul>
-<h2 id="regen-the-wsdl">Regen The WSDL</h2>
-<h2 id="database-changes">Database Changes</h2>
-<h2 id="reset-the-demons">Reset The Demons</h2></div>
+<ol>
+<li>Make sure that you compile any programs that you want added to the WSDL</li>
+<li>Login to Shap-exp-360pro for Production or Shap-exp-360dev for Development.</li>
+<li>Launch WinSCP</li>
+<li>Move over the .r files, of the programs you complied in Step 1 (See below for the directory names)</li>
+<li>Launch the proxy generator</li>
+<li>Hit the folder icon and navigate to C:\shapiro360 and chose ShapiroProd or ShapiroDev</li>
+<li>The hit Procedure-&gt;Add-&gt;Non-Persistent </li>
+<li>Hit save and then hit   to generate the WSDL</li>
+<li>Next go back to WinSCP and navigate to the below folders</li>
+<li>Drag ShapiroProd.xpxg from the left panel to the right panel.  If you get and error the delete the file on the right side and then drag over the file.</li>
+<li>Open up a rashi6 session and cd to /home/allegro/bin and run either xpxgdev-build.sh or xpxgprod-build.sh </li>
+<li>You should receive a message that this run was successful. </li>
+<li>Next go to http://192.168.66.102:9090</li>
+<li>Go to the Web Services Adapter section and select either shap-exp-rashi6.wsadevShapiro360 or shap-exp-rashi6.wsaprodShapiro360</li>
+<li>Got t Status Enablement and disable the Web Service Adaptor.</li>
+<li>Then go back to the previous screen and hit Update.</li>
+<li>Type /progs/mxp/shap102/objects/ShapiroProd.wsm or /progs/mxp/shap102test/objects/ShapiroDev.wsm and hit submit.</li>
+<li>Click through the next page and you should receive a message that it was updated. </li>
+<li>Lastly right click and open Configure Tomcat as administrator </li>
+<li>Click stop, wait about 10 seconds and then start tomcat.</li>
+</ol></div>
         </div>
 
         <footer class="col-md-12">
@@ -117,11 +101,11 @@
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>
-            var base_url = ".",
+            var base_url = "..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js" defer></script>
-        <script src="search/main.js" defer></script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
     <div class="modal-dialog">
@@ -189,8 +173,3 @@
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.0.4
-Build Date UTC : 2018-11-15 19:54:59
--->
