@@ -1,3 +1,5 @@
+# Regen WSDL
+
 1.	Make sure that you compile any programs that you want added to the WSDL</br>
 ![](regenwsdlimgs/winscplogo.png)
 2.	Login to Shap-exp-360pro for Production or Shap-exp-360dev for Development.
@@ -11,6 +13,7 @@
 7.	The hit Procedure->Add->Non-Persistent 
 8.	Hit save and then hit   to generate the WSDL
 9.	Next go back to WinSCP and navigate to the below folders
+![](regenwsdlimgs/winscpscreen.png)
 10.	Drag ShapiroProd.xpxg from the left panel to the right panel.  If you get and error the delete the file on the right side and then drag over the file.
 11.	Open up a rashi6 session and cd to /home/allegro/bin and run either xpxgdev-build.sh or xpxgprod-build.sh 
 12.	You should receive a message that this run was successful. 
@@ -20,5 +23,6 @@
 16.	Then go back to the previous screen and hit Update.
 17.	Type /progs/mxp/shap102/objects/ShapiroProd.wsm or /progs/mxp/shap102test/objects/ShapiroDev.wsm and hit submit.
 18.	Click through the next page and you should receive a message that it was updated. 
-19.	Lastly right click and open Configure Tomcat as administrator 
+19.	Lastly right click and open Configure Tomcat as administrator</br>
+![](regenwsdlimgs/tomcat.png)
 20.	Click stop, wait about 10 seconds and then start tomcat.
