@@ -7,6 +7,7 @@
 5.	Launch the proxy generator</br>
 ![](regenwsdlimgs/proxygen.png)
 6.	Hit the folder icon and navigate to C:\shapiro360 and chose ShapiroProd or ShapiroDev
+![](regenwsdlimgs/proxygen2.png)
 7.	The hit Procedure->Add->Non-Persistent 
 8.	Hit save and then hit   to generate the WSDL
 9.	Next go back to WinSCP and navigate to the below folders
