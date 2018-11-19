@@ -28,6 +28,10 @@
 ##Database Changes
 
 
+##Crontab Changes
+
+* Change the crontab by typing: crontab -e -u demon1
+
 
 ##Reset The Demons
 
