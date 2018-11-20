@@ -5,7 +5,7 @@
 * Go into your favorite directory.
 * Right-click in whitespace and click "Git Bash Here".
 * A command prompt will come up. Run the following:
-    * python install mkdocs (this will install mkdocs, which you need to compile the documentation into HTML pages)
+    * pip install mkdocs (this will install mkdocs, which you need to compile the documentation into HTML pages)
     * git clone //shap-exp-360pro/c$/inetpub/wwwroot/shapiro-cms/templates/rt_metamorph/shapirodocumentaion
     * cd shapirodocumentaion
     * git checkout master

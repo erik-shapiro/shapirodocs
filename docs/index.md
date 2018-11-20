@@ -1,6 +1,6 @@
 # Shapiro MIS Documentation
 
-## Ocean Insights
+## [Ocean Insights](Ocean Insights/about)
 
 * Shapiro Subscription Program: imp/callOceanInsightsTracking.p 
 
@@ -17,28 +17,28 @@
 
 * [Shapiro Response URL](https://shapiro360.shapiro.com/index.php/ports-america-response)
 
-## Hub 360
+## [Hub 360](Hub360/about)
 
-test
+* [Shapiro Response URL](https://shapiro360.shapiro.com/hub360/)
 
-
-##Regen The WSDL
+## Regen The WSDL
 
 * [How to regen the WSDL](regenwsdl)
 
 
-##Database Changes
+## Database Changes
 
 
-##Crontab Changes
+## Crontab Changes
 
 * Change the crontab by typing: crontab -e -u demon1
 
 
-##Reset The Demons
+## Reset The Demons
 
 1.	cd to /usr/bin
 *	run stopdemons
 *	cd to /data3/demon1
 *	remove STOPDEMON1
 *	run new.start.demon as su
+
