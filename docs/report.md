@@ -717,3 +717,29 @@ Once that’s done, save a TXT file to communicate that the XLSX is fully writte
     *	Process a CSV as a pie chart. This mirrors pie_chart() from the Master XLS.
 *	bar_graph()
     *	Process a CSV as a bar graph. This mirrors bar_graph() from the Master XLS.
+
+# Scheduled Runs
+
+## Rashi 6: Generate .csv Files
+
+* The demon1 crontab runs /usr/bin/run_report_sched.sh runs on the 15th and 45th minute of each hour.
+* That calls /usr/bin/mxp_report.pf.
+* That calls imp/report-sched.p.
+* imp/report-sched.p figures the time and passes it into imp/report.p.
+    * For instance, if the time is between 7:10 AM and 7:39 AM, imp/report-sched.p will pass "8AM" to imp/report.p.
+
+## schedtask: Generate .xls Files
+
+* The Task Scheduler calls C:\bat\report.bat on the 15th and 45th minute of each hour.
+* It will determine what time to run.
+    * For instance, if the time is between 7:40 AM and 8:09 AM, it will get the time "8AM".
+* It will look for a directory according to this time.
+    * This will be in the format: \\myshapiro\dfs\corp-daily\rpt\{TIME}
+* If the directory exists, and it has a master XLS and rpt-list.txt, then report.bat will run the master XLS.
+
+## Rashi 6: Mail .xls Files
+
+* The demon1 crontab runs /usr/bin/mail_report_sched.sh on the 0th and 30th minute of each hour.
+* It will look for a mail script according to the time.
+    * The mail script will be in this location: /usr5/dailyreports/rpt/{TIME}/send-script.sh
+* If the mail script is there, mail_report_sched.sh will run it.
