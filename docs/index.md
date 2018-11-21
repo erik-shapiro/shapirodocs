@@ -17,6 +17,8 @@
 
 * [Shapiro Response URL](https://shapiro360.shapiro.com/index.php/ports-america-response)
 
+## [Document Indexing](Document Indexing/about)
+
 ## [Hub 360](Hub360/about)
 
 * [Shapiro Response URL](https://shapiro360.shapiro.com/hub360/)
