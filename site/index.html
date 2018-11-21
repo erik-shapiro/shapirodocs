@@ -60,12 +60,14 @@
             <li><a href="#database-changes">Database Changes</a></li>
             <li><a href="#crontab-changes">Crontab Changes</a></li>
             <li><a href="#reset-the-demons">Reset The Demons</a></li>
+            <li><a href="#local-documentation-setup">Local Documentation Setup</a></li>
+            <li><a href="#reports">Reports</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
 <h1 id="shapiro-mis-documentation">Shapiro MIS Documentation</h1>
-<h2 id="ocean-insights">Ocean Insights</h2>
+<h2 id="ocean-insights"><a href="Ocean Insights/about">Ocean Insights</a></h2>
 <ul>
 <li>
 <p>Shapiro Subscription Program: imp/callOceanInsightsTracking.p </p>
@@ -89,8 +91,10 @@
 <p><a href="https://shapiro360.shapiro.com/index.php/ports-america-response">Shapiro Response URL</a></p>
 </li>
 </ul>
-<h2 id="hub-360">Hub 360</h2>
-<p>test</p>
+<h2 id="hub-360"><a href="Hub360/about">Hub 360</a></h2>
+<ul>
+<li><a href="https://shapiro360.shapiro.com/hub360/">Shapiro Response URL</a></li>
+</ul>
 <h2 id="regen-the-wsdl">Regen The WSDL</h2>
 <ul>
 <li><a href="regenwsdl">How to regen the WSDL</a></li>
@@ -107,7 +111,35 @@
 <li>cd to /data3/demon1</li>
 <li>remove STOPDEMON1</li>
 <li>run new.start.demon as su</li>
-</ol></div>
+</ol>
+<h2 id="local-documentation-setup">Local Documentation Setup</h2>
+<ul>
+<li>Download <a href="https://git-scm.com/downloads">Git</a>.</li>
+<li>Install <a href="https://www.python.org/downloads/release/python-371">Python</a> (be sure to "Add Python 3.7 to PATH"). It should include pip by default.</li>
+<li>Go into your favorite directory.</li>
+<li>Right-click in whitespace and click "Git Bash Here".</li>
+<li>A command prompt will come up. Run the following:<ul>
+<li>pip install mkdocs (this will install mkdocs, which you need to compile the documentation into HTML pages)</li>
+<li>git clone //shap-exp-360pro/c$/inetpub/wwwroot/shapiro-cms/templates/rt_metamorph/shapirodocumentaion</li>
+<li>cd shapirodocumentaion</li>
+<li>git checkout master</li>
+</ul>
+</li>
+<li>Now make your changes. Once you are done, commit your raw changes to the master branch:<ul>
+<li>git pull (make sure you have the latest version of the repository)</li>
+<li>git status (make sure your files show up as edited)</li>
+<li>git add {filename} (stage your files for a commit)</li>
+<li>git commit (be sure to add a commit message on the next screen, or else your commit will not take)</li>
+<li>git push (this pushes your raw changes to the master branch)</li>
+<li>mkdocs gh-deploy (this compiles the documentation site and syncs it to 360)</li>
+</ul>
+</li>
+<li>Please remember to do both: push to the master branch and deploy the new site. These are two distinct branches, and updating one will not update the other.</li>
+</ul>
+<h2 id="reports">Reports</h2>
+<ul>
+<li><a href="report">Reports</a></li>
+</ul></div>
         </div>
 
         <footer class="col-md-12">
@@ -190,5 +222,5 @@
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2018-11-20 18:48:49
+Build Date UTC : 2018-11-20 21:31:43
 -->

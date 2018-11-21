@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Tables - Shapiro Documentation</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="..">Shapiro Documentation</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#tables">Tables</a></li>
+            <li><a href="#rpt-hdr">rpt-hdr</a></li>
+            <li><a href="#rpt-xls">rpt-xls</a></li>
+            <li><a href="#rpt-inp">rpt-inp</a></li>
+            <li><a href="#important-note">Important Note</a></li>
+            <li><a href="#rpt-qry">rpt-qry</a></li>
+            <li><a href="#rpt-var">rpt-var</a></li>
+            <li><a href="#rpt-det">rpt-det</a></li>
+            <li><a href="#rpt-tab">rpt-tab</a></li>
+        <li class="main "><a href="#central-program">Central Program</a></li>
+            <li><a href="#parameters">Parameters</a></li>
+            <li><a href="#body">Body</a></li>
+            <li><a href="#internal-procedures">Internal Procedures</a></li>
+            <li><a href="#examples-of-calls">Examples of Calls</a></li>
+        <li class="main "><a href="#automation">Automation</a></li>
+            <li><a href="#report-modifier">Report Modifier</a></li>
+            <li><a href="#report-runner">Report Runner</a></li>
+        <li class="main "><a href="#master-xls">Master XLS</a></li>
+            <li><a href="#scheduled">Scheduled</a></li>
+            <li><a href="#realtime">Realtime</a></li>
+        <li class="main "><a href="#shapiro-360">Shapiro 360</a></li>
+            <li><a href="#report-getter">Report Getter</a></li>
+            <li><a href="#php-script">PHP Script</a></li>
+            <li><a href="#report-runner_1">Report Runner</a></li>
+            <li><a href="#master-py">Master PY</a></li>
+        <li class="main "><a href="#scheduled-runs">Scheduled Runs</a></li>
+            <li><a href="#rashi-6-generate-csv-files">Rashi 6: Generate .csv Files</a></li>
+            <li><a href="#schedtask-generate-xls-files">schedtask: Generate .xls Files</a></li>
+            <li><a href="#rashi-6-mail-xls-files">Rashi 6: Mail .xls Files</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="tables">Tables</h1>
+<p>The “name” field is the ID which links all tables.</p>
+<h2 id="rpt-hdr">rpt-hdr</h2>
+<p>This is the header; a report will not be acknowledged unless it has an rpt-hdr record.</p>
+<ul>
+<li>name<ul>
+<li>The program-friendly name for a report. Please don’t use spaces or goofy characters. Try to make it alphanumerics, underscores, and dashes only. It also goes in the filename of the spreadsheet, so don’t put anything uncouth.</li>
+</ul>
+</li>
+<li>run-time<ul>
+<li>The time of day that this should run.<ul>
+<li>For example: “7:30AM”, “8PM”.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>run-day <ul>
+<li>The day(s) that this should run.<ul>
+<li>If you want days of the week, specify them like this:<ul>
+<li>“Monday,Tuesday,Wednesday,Thursday,Friday”</li>
+</ul>
+</li>
+<li>If you want days of the month, specify them like this:<ul>
+<li>“1,15”</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>calc-prog<ul>
+<li>The name of an external program to reference. Its behavior is dependent on rpt-hdr.use-remote.</li>
+</ul>
+</li>
+<li>use-remote<ul>
+<li>If this is yes, then it will run as an external report.<ul>
+<li>This ignores rpt-qry and rpt-det tables. It will call rpt-hdr.calc-prog like this:
+    run value(rpt-hdr.calc-prog) (
+      input rpt-hdr.name,
+      input full-dir + "/",
+      input login
+    ) no-error.</li>
+</ul>
+</li>
+<li>If this is no, then it will run as an internal report.<ul>
+<li>This means looking up rpt-qry and rpt-det tables to generate a report.</li>
+<li>If rpt-hdr.calc-prog is set, it will be run as a filter.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>rpt-version<ul>
+<li>A number representing the version of the report.</li>
+</ul>
+</li>
+<li>party<ul>
+<li>The party associated with this report. Set this to customer.cust-no or the name of a department (“Compliance”, “GLG”, etc.).</li>
+</ul>
+</li>
+<li>rpt-desc<ul>
+<li>The human-readable name for this report.</li>
+</ul>
+</li>
+<li>shap360-name<ul>
+<li>If you leave this blank, no one in Shapiro 360 will see it.</li>
+<li>If you set this, it will be visible in Shapiro 360. The value of rpt-hdr.party must be in web-login.us-stats-cust-no-allowed.</li>
+</ul>
+</li>
+<li>shap360-users<ul>
+<li>If this report is visible in Shapiro 360, you can lock it down to certain 360 users.</li>
+<li>If you add names here, it will only be visible to those users.</li>
+<li>If you leave this blank, it will be visible to all users.</li>
+</ul>
+</li>
+</ul>
+<h2 id="rpt-xls">rpt-xls</h2>
+<p>This table defines the email which sends this report.
+<em>   name
+    *   Should match rpt-hdr.name.
+</em>   col-name
+    *   For use in internal reports. Filter on a certain column name when generating the spreadsheet.
+<em>   cell-value
+    *   For use in internal reports. Filter on a certain column value when generating the spreadsheet.
+</em>   from-addr
+    *   For the email, the address that should send it. Commonly “shapiroautomation@shapiro.com”.
+<em>   to-addr
+    *   The recipient email for this report. You can send to multiple emails if you separate them by commas.
+</em>   rpt-title
+    *   The subject line of the email.
+<em>   rpt-body
+    *   The body of the email. If you leave this blank, it will send a generic message.
+</em>   send-if-blank
+    *   If this is yes, you’ll try to send the report even if you don’t have one to send.</p>
+<h2 id="rpt-inp">rpt-inp</h2>
+<p>If your report needs user input, define those input fields here. When the report is run on a schedule, it will look for fields where rpt-inp.login is “SYSTEM”.</p>
+<p>For an example of this, see imp/report-fb-all.p:get-date-range.</p>
+<ul>
+<li>name<ul>
+<li>Should match rpt-hdr.name.</li>
+</ul>
+</li>
+<li>login<ul>
+<li>The login of the user. This can be “SYSTEM” (when run on a schedule), an Automation login (when run from Automation), or a Joomla numeric user ID (when run from Shapiro 360).</li>
+</ul>
+</li>
+<li>inp-seq<ul>
+<li>Specifies the order that this should be printed. 1 is printed first, then 2, then 3, etc.</li>
+</ul>
+</li>
+<li>inp-name<ul>
+<li>The name of the input field. Put something that will look nice when the user sees it.<ul>
+<li>Instead of “start-date”, put “Start Date”.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>inp-value<ul>
+<li>The value that the user set for this input field.</li>
+</ul>
+</li>
+<li>inp-desc<ul>
+<li>The description of the input field. Put something that will give the user instructions.<ul>
+<li>For example, if inp-name is “Start Date”, inp-desc could be “Set the starting date for this report.”</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>inp-type<ul>
+<li>The datatype of this field.</li>
+<li>This is important for displaying the report properly in Shapiro 360.</li>
+</ul>
+</li>
+</ul>
+<h2 id="important-note">Important Note</h2>
+<p>The tables below this are only used for internal reports.</p>
+<p>“Internal” does not mean “internal to Shapiro”. It means “the query is run internally inside of imp/report.p”.</p>
+<p>If rpt-hdr.use-remote is yes, you can ignore the below tables.</p>
+<h2 id="rpt-qry">rpt-qry</h2>
+<p>This defines the query for finding records to put on the report.</p>
+<p>Each rpt-qry record defines one phrase in the “where” clause.</p>
+<p>Each rpt-qry record is joined by “and” to create the full where clause.</p>
+<ul>
+<li>name<ul>
+<li>Should match rpt-hdr.name.</li>
+</ul>
+</li>
+<li>table-depth<ul>
+<li>There can be multiple queries in a report. This specifies how many queries deep you are.</li>
+<li>For instance, say you want to find every bookeq for every shiphead.<ul>
+<li>Shiphead will be table-depth 1.</li>
+<li>Bookeq will be table-depth 2.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>depth-seq<ul>
+<li>Ignore this. It should always be 1.</li>
+<li>You can use it to set up “or”-like behavior if you super seriously need to.</li>
+</ul>
+</li>
+<li>table-name<ul>
+<li>The table to query.</li>
+<li>“shiphead”, “bookeq”, etc.</li>
+</ul>
+</li>
+<li>field-name<ul>
+<li>The field to compare against.</li>
+<li>“create-date”, “container-number”, etc.</li>
+</ul>
+</li>
+<li>operator<ul>
+<li>The verb to use.</li>
+<li>“=”, “begins”, etc.</li>
+</ul>
+</li>
+<li>field-value<ul>
+<li>The value to compare against.</li>
+<li>If field-type is “date”, you can use an integer.<ul>
+<li>For instance, if you set field-value to “-5”, then it will be calculated as “today - 5”.</li>
+</ul>
+</li>
+<li>If local-var is yes, then set this to the name of a local variable.<ul>
+<li>For example, “branch”.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>field-type<ul>
+<li>The datatype to compare against.</li>
+<li>This is important for doing date/numeric comparisons.</li>
+</ul>
+</li>
+<li>local-var<ul>
+<li>If this is yes, then you will compare against a local variable as defined in the rpt-var table.</li>
+</ul>
+</li>
+</ul>
+<h2 id="rpt-var">rpt-var</h2>
+<p>When running multi-table queries, you’ll need some way to link one table to another. For example, to find every bookeq for every shiphead, you’ll need to compare branch, dept, and id. rpt-var stores those as local variables at runtime.</p>
+<ul>
+<li>name<ul>
+<li>Should match rpt-hdr.name.</li>
+</ul>
+</li>
+<li>table-depth<ul>
+<li>The depth to pull this variable from. Should match rpt-qry.table-depth.</li>
+</ul>
+</li>
+<li>depth-seq<ul>
+<li>Should match rpt-qry.depth-seq.</li>
+</ul>
+</li>
+<li>field-name<ul>
+<li>The field to pull as a local variable.<ul>
+<li>For example, if you’re pulling from shiphead, this might be “branch”.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="rpt-det">rpt-det</h2>
+<p>Each rpt-det record defines a column on the report.</p>
+<ul>
+<li>name<ul>
+<li>Should match rpt-hdr.name.</li>
+</ul>
+</li>
+<li>field-seq<ul>
+<li>The order of this column on the report.</li>
+</ul>
+</li>
+<li>table-name<ul>
+<li>The name of the table to pull this field from.<ul>
+<li>For example, “shiphead”.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>field-name<ul>
+<li>The name of the field to pull this data from.<ul>
+<li>For example, “branch”.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>col-name<ul>
+<li>The name of the column to display on the spreadsheet.</li>
+</ul>
+</li>
+<li>data-type<ul>
+<li>The Progress datatype.</li>
+</ul>
+</li>
+<li>excel-type<ul>
+<li>The Excel datatype. This is important for formatting columns.</li>
+</ul>
+</li>
+<li>calc-prog<ul>
+<li>If you need to calculate this field, leave field-name blank. Then, set calc-prog to a program name.</li>
+<li>It will be called like this:
+        run value(rpt-det.calc-prog) (
+          input  rpt-hdr.name,
+          input  rpt-det.table-name,
+          input  dbc:get-curr-rowid(rpt-det.table-name),
+          input  rpt-det.col-name,
+          input  login,
+          output rpt-cell.cell-value
+        ) no-error.</li>
+</ul>
+</li>
+<li>hidden<ul>
+<li>Use this if you want to hide the value of this column.</li>
+<li>This is used when you want to pull different rows onto different tabs.</li>
+</ul>
+</li>
+</ul>
+<h2 id="rpt-tab">rpt-tab</h2>
+<p>If you want more than one tab on your report, create an rpt-tab record.</p>
+<ul>
+<li>name<ul>
+<li>Should match rpt-hdr.name.</li>
+</ul>
+</li>
+<li>col-name<ul>
+<li>The name of the column to generate tabs from.</li>
+<li>This should match rpt-det.col-name.</li>
+</ul>
+</li>
+<li>cell-value<ul>
+<li>If cell-value is blank, you will create one tab for every unique value in a column.</li>
+<li>If you want to filter to one value, specify it here.</li>
+</ul>
+</li>
+</ul>
+<h1 id="central-program">Central Program</h1>
+<p>Rashi 6 imp/report.p</p>
+<h2 id="parameters">Parameters</h2>
+<ul>
+<li>Input<ul>
+<li>Report time<ul>
+<li>This determines the output location of the report.</li>
+<li>If it’s a time (such as “8AM”, “10AM”, or “1stOfMonth”), it will end up in a directory where schedtask will generate the .xls at a given time.</li>
+<li>If it’s blank, it will put the report in a user-specific directory based on the user login input. An email will be sent to {user login}@shapiro.com with realtime master XLS instructions.</li>
+<li>If it’s “shapiro360”, it will go to a special directory for Shapiro 360 report downloads. See the documentation on shapiro360/runRpt.p for more information.</li>
+</ul>
+</li>
+<li>Report name<ul>
+<li>If this is blank, it will run all reports matching a given time.</li>
+<li>For example, if “8AM” is your report time, and the report name is blank, it will run all reports scheduled for 8 AM.</li>
+</ul>
+</li>
+<li>User login<ul>
+<li>If the report is being run on a schedule, then this should be “SYSTEM”.</li>
+<li>If it’s run for an internal user, this should be their Automation login. (Hopefully we can just append “@shapiro.com” to get their email address.)</li>
+<li>If it’s run for Shapiro 360, this will be their user ID in the Joomla MySQL database. In this case, it will be an integer.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="body">Body</h2>
+<p>Kicks off the reports based on your input parameters: whether it should be a scheduled job or an individual report, and whether it goes internal or out to Shapiro 360. This sets the output directory and calls wrt-rpt. It also emails the Automation user if necessary.</p>
+<h2 id="internal-procedures">Internal Procedures</h2>
+<p>There are two kinds of reports: internal and remote.
+Internal reports run a database query through imp/report.p. This largely happens in get-depth.
+External reports run a database query in an external program. imp/report.p will call this program.
+External reports are easier.</p>
+<ul>
+<li>Internal and external<ul>
+<li>wrt-rpt<ul>
+<li>Writes an individual report. If you’re doing a scheduled run for a certain time, you’ll call wrt-rpt once for each report scheduled.</li>
+<li>Calls prep-output to set up your individual directories and sendmail scripts.</li>
+<li>If reports run inside of imp/report.p, you’ll call:<ul>
+<li>get-depth to traverse the rpt-qry and rpt-det tables (these tables define the database queries and assign statements which produce reports)</li>
+<li>finalize-tabs to split data into tabs if necessary</li>
+</ul>
+</li>
+<li>If reports don’t run inside of imp/report.p, you’ll call remote-report to run the report.</li>
+</ul>
+</li>
+<li>procedure get-full-dir<ul>
+<li>This will generate one directory for each rpt-xls record. There will be one by default.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Internal reports<ul>
+<li>get-depth<ul>
+<li>This one’s a doozy.</li>
+<li>This builds a query using rpt-qry to find records for pulling data onto the report. One rpt-qry record represents one phrase in the query’s “where” clause.</li>
+<li>rpt-det specifies which data you pull onto the report. One rpt-det record represents one column on the report.</li>
+<li>Some notes on external programs:<ul>
+<li>If rpt-hdr.calc-prog is set, get-depth runs a filter function like so:
+  run value(rpt-hdr.calc-prog) (
+    input  rpt-hdr.name,
+    input  table-name,
+    input  table-rowid,
+    input  "filter",
+    input  user-login,
+    output continue
+  ) no-error.<ul>
+<li>Use this if you want to skip certain records, but can’t do so through defining rpt-qry records. (For example, if you need logic involving “or”.)</li>
+<li>If continue is Y, then it will put this record on the report. Otherwise, it will skip this record.</li>
+</ul>
+</li>
+<li>If rpt-det.calc-prog is blank, then it will pull the value out of the database directly.</li>
+<li>If rpt-det.calc-prog is set, it will run that program to determine the value to put in the cell. It calls rpt-det.calc-prog like so:
+    run value(file-info:full-pathname) (
+      input  rpt-hdr.name,
+      input  rpt-det.table-name,
+      input  dbc:get-curr-rowid(rpt-det.table-name),
+      input  rpt-det.col-name,
+      input  login,
+      output rpt-cell.cell-value
+    ) no-error.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>prep-output<ul>
+<li>Prepare directories for CSV files to go in.</li>
+<li>Write rpt-list.txt so that the master XLS knows to run this report.</li>
+<li>Append to send-script.sh so that you mail the report out (if it’s scheduled).</li>
+</ul>
+</li>
+<li>procedure open-report<ul>
+<li>Create directories to house .csv and .xls files.</li>
+</ul>
+</li>
+<li>procedure finalize-tabs<ul>
+<li>Write the header line in each .csv file you’ve generated.</li>
+</ul>
+</li>
+<li>procedure open-tab<ul>
+<li>Not called.</li>
+</ul>
+</li>
+<li>procedure output-line<ul>
+<li>Outputs lines in every relevant directory.</li>
+</ul>
+</li>
+<li>procedure print-line-by-tabs<ul>
+<li>Outputs lines to every relevant .csv file.</li>
+</ul>
+</li>
+<li>print-line-to-file<ul>
+<li>Read the rpt-cell table and put data in a .csv file.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>External reports<ul>
+<li>remote-report<ul>
+<li>Calls a program to generate .csv files into a directory. Calls the program like so:
+    run value(file-info:full-pathname) (
+      input rpt-hdr.name,
+      input full-dir + "/",
+      input login
+    ) no-error.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="examples-of-calls">Examples of Calls</h2>
+<p>imp/report.p (
+  input “7:30AM”,
+  input “”,
+  input “SYSTEM”
+).
+In this case, we’re running all of the morning reports.</p>
+<p>imp/report.p (
+  input “shapiro360”,
+  input “fb-draft”,
+  input “648”
+).
+A user on 360 is running the Five Below All PO report. The Joomla user ID is 648.</p>
+<p>imp/report.p (
+  input “realtime”,
+  input “mr-fb-pom”,
+  input “gregory”
+).
+Automation user “gregory” is running the M+R Five Below POM report. Because the time is “realtime”, the realtime XLS will be emailed to “gregory@shapiro.com”. (It will be S:\CORP-DAILY\realtime\gregory\realtime-master.xls.)</p>
+<p>imp/report.p (
+  input “”,
+  input “fb-onwat-fb”,
+  input “SYSTEM”
+).
+Someone is testing the Five Below On the Water report. They must have typed this into the Progress Editor. This run will end up in CORP-DAILY/rpt/realtime.</p>
+<h1 id="automation">Automation</h1>
+<p>These are programs in Automation for updating and running reports.</p>
+<p>I have tried to put advice in the “Help” box on the right in this program. Or rather, I have put advice in that box, and I have tried to make it good advice.</p>
+<h2 id="report-modifier">Report Modifier</h2>
+<p>Before starting, you must enter a report name in “Report:” and hit Enter.</p>
+<p>If you don’t know one, hit F6 to look one up.</p>
+<p>Or, if you want to create a new report, type the name for it and hit Enter. Please make it program-friendly (alphanumerics, underscores, and dashes only).</p>
+<p>Use the “Run” button to run the report. It’ll email you a realtime master XLS.</p>
+<h3 id="header">Header</h3>
+<p><img alt="" src="../images/report/rpt-hdr.png" /></p>
+<h4 id="header_1">Header</h4>
+<ul>
+<li>Program<ul>
+<li>If Use Remote? is yes, then Program will be called like this:<ul>
+<li>run value(rpt-hdr.calc-prog) (
+              input rpt-hdr.name,
+              input full-dir + "/",
+              input login
+            ) no-error.</li>
+</ul>
+</li>
+<li>If Use Remote? is no, then Program will be used as a filter, like this:<ul>
+<li>run value(rpt-hdr.calc-prog) (
+                input  rpt-hdr.name,
+                input  table-name,
+                input  table-rowid,
+                input  "filter",
+                input  user-login,
+                output continue
+              ) no-error.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Description<ul>
+<li>A human-readable description for the program.</li>
+</ul>
+</li>
+<li>Party<ul>
+<li>The party for this program. You can leave it blank, set it to a customer code, or set it to a Shapiro department.</li>
+</ul>
+</li>
+<li>Version<ul>
+<li>A number representing the version of the program.</li>
+</ul>
+</li>
+<li>Use remote?<ul>
+<li>This determines the behavior of the Program field. If you set this to yes, then you can have most of the Progress programming coming out of your own program.</li>
+</ul>
+</li>
+<li>Shapiro 360 Name<ul>
+<li>If you want to display this in Shapiro 360, set this. The Party must match the customer code for a user.</li>
+</ul>
+</li>
+<li>Shapiro 360 Users<ul>
+<li>If you leave this blank, it’ll display to all users matching the Party. If you set it, this report will only show to the users specified.</li>
+</ul>
+</li>
+</ul>
+<h4 id="input">Input</h4>
+<ul>
+<li>Field Name<ul>
+<li>The name of the field. Make it nice to look at; do “Start Date”, not “start-date”.</li>
+</ul>
+</li>
+<li>Default Value<ul>
+<li>The default value. This will be used if the report is run on a schedule. It will also auto-populate for a user before they have set their own preferred value.</li>
+</ul>
+</li>
+<li>Data Type<ul>
+<li>The datatype for this field. It’s important to specify this so you can perform accurate numeric or date comparisons.</li>
+</ul>
+</li>
+<li>Description<ul>
+<li>You can use this to give instructions to the user if you need to.</li>
+</ul>
+</li>
+</ul>
+<h3 id="query">Query</h3>
+<p>You will only need this if “Use Remote?” is no.</p>
+<p><img alt="" src="../images/report/rpt-inp.png" /></p>
+<h4 id="query_1">Query</h4>
+<p>Every record here defines a phrase in the “where” clause.</p>
+<ul>
+<li>Depth<ul>
+<li>If you are querying tables within tables, this specifies which query you are talking about.</li>
+<li>For instance, say you are querying every bookeq for every shiphead.<ul>
+<li>shiphead would be Depth 1.</li>
+<li>bookeq would be Depth 2.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Table<ul>
+<li>The table to query.</li>
+</ul>
+</li>
+<li>Field<ul>
+<li>The field to compare against.</li>
+</ul>
+</li>
+<li>Operator<ul>
+<li>The verb to use: “=”, “begins”, etc.</li>
+</ul>
+</li>
+<li>Value<ul>
+<li>The value to compare against.</li>
+<li>If Data Type is “date”, then you can put an integer here to perform comparisons relative to today.<ul>
+<li>For example, if you enter “-5”, then the comparison will be against “today - 5”.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Use Local Variable?<ul>
+<li>Usually this is no. But, if you want to compare against the value of a local variable, select yes.</li>
+<li>If you select yes, then “value” must be the name of a local variable (“branch”, “dept”, etc.).</li>
+<li>Note that you must define local variables below.</li>
+</ul>
+</li>
+<li>Data Type<ul>
+<li>The datatype of the field you’re comparing against.</li>
+</ul>
+</li>
+</ul>
+<h4 id="local-variables">Local Variables</h4>
+<ul>
+<li>Query Depth<ul>
+<li>Which depth to pull this local variable from.</li>
+<li>If you’re querying every bookeq for every shiphead:<ul>
+<li>shiphead will be Depth 1.</li>
+<li>bookeq will be Depth 2.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Field Name<ul>
+<li>The field to pull into a local variable.</li>
+<li>In the shiphead/bookeq example:<ul>
+<li>You’ll want to pull “branch”, “dept”, and “id” from Depth 1.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="columns">Columns</h3>
+<p>You will only need this if “Use Remote?” is no.</p>
+<p><img alt="" src="../images/report/rpt-col.png" /></p>
+<h4 id="columns_1">Columns</h4>
+<ul>
+<li>Move Up/Move Down<ul>
+<li>Use these to change the order of columns on the report. The columns are printed in order from left to right.</li>
+</ul>
+</li>
+<li>Table<ul>
+<li>The table to pull this column from.</li>
+</ul>
+</li>
+<li>Field<ul>
+<li>The field name to pull this column from.</li>
+</ul>
+</li>
+<li>Program<ul>
+<li>If you need to calculate the value of this field, put in a program name. It will be called like this:
+        run value(rpt-det.calc-prog) (
+          input  rpt-hdr.name,
+          input  rpt-det.table-name,
+          input  dbc:get-curr-rowid(rpt-det.table-name),
+          input  rpt-det.col-name,
+          input  login,
+          output rpt-cell.cell-value
+        ) no-error.</li>
+</ul>
+</li>
+<li>Column Header<ul>
+<li>The title for the column to print in the spreadsheet.</li>
+</ul>
+</li>
+<li>Hidden?<ul>
+<li>Use this to hide a column. You’ll want to do that if you are creating tabs.</li>
+</ul>
+</li>
+<li>Progress Type<ul>
+<li>The datatype of the variable in progress.</li>
+</ul>
+</li>
+<li>Excel Type<ul>
+<li>The format of the value in the Excel spreadsheet.</li>
+<li>This is important to set so that integers don’t turn into scientific notation and so that dates don’t get reformatted.</li>
+</ul>
+</li>
+</ul>
+<h4 id="tabs">Tabs</h4>
+<p>Only bother with this if you want multiple tabs in your report.</p>
+<ul>
+<li>Column Header<ul>
+<li>Set this to the Column Header from the above form.</li>
+<li>There will be one tab for each unique value in this column.<ul>
+<li>For example, if you set it on the “Port of Entry” column, then you might have tabs like:<ul>
+<li>“LOS ANGELES, CA”</li>
+<li>“MEMPHIS, TN”</li>
+<li>“BALTIMORE, MD”</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="mail">Mail</h3>
+<p><img alt="" src="../images/report/rpt-xls.png" /></p>
+<ul>
+<li>To Email<ul>
+<li>The email to receive this report.</li>
+</ul>
+</li>
+<li>From Email<ul>
+<li>The email to send this report.</li>
+</ul>
+</li>
+<li>Email Subject<ul>
+<li>The subject line for the email.</li>
+</ul>
+</li>
+<li>Email Body<ul>
+<li>The body text for the email. If you leave it blank, we’ll send a generic message.</li>
+</ul>
+</li>
+<li>Send if Blank?<ul>
+<li>If there’s no report to send, then you can prevent us from sending anything.</li>
+<li>Set this to “yes” if you want the mailer to run even if we don’t have a report.</li>
+</ul>
+</li>
+<li>Run time<ul>
+<li>The time of day to run.</li>
+</ul>
+</li>
+<li>Run day<ul>
+<li>The day of week to run.</li>
+</ul>
+</li>
+<li>Run month<ul>
+<li>The month to run. Leave blank if it should run every month.</li>
+</ul>
+</li>
+<li>Column Name<ul>
+<li>Use this to filter reports. Probably leave it blank.</li>
+</ul>
+</li>
+<li>Cell Value<ul>
+<li>Use this to filter reports. Probably leave it blank.</li>
+</ul>
+</li>
+</ul>
+<h2 id="report-runner">Report Runner</h2>
+<p><img alt="" src="../images/report/rpt-run.png" /></p>
+<ul>
+<li>Search<ul>
+<li>Type in a report name, party, or description.</li>
+</ul>
+</li>
+<li>OK<ul>
+<li>Hit this to select a report from the table. You need to hit “OK” before you can run it.</li>
+</ul>
+</li>
+<li>Input<ul>
+<li>This table displays user input fields.</li>
+<li>The program will set up defaults for you.</li>
+<li>You can change them using the “Input Value” text input.</li>
+</ul>
+</li>
+<li>Input Value<ul>
+<li>Click “Update” to change an input value.</li>
+<li>Click “Save” to save your new input value.</li>
+</ul>
+</li>
+<li>Run<ul>
+<li>This kicks off a report. Once it’s done, you will receive an email with the report.</li>
+</ul>
+</li>
+<li>Cancel<ul>
+<li>You will need to wait while a report runs. If you cannot wait, you can click “Cancel”.</li>
+<li>If you click “Cancel”, your report will not finish.</li>
+</ul>
+</li>
+<li>Return<ul>
+<li>Use this to exit the Report Runner.</li>
+</ul>
+</li>
+</ul>
+<h1 id="master-xls">Master XLS</h1>
+<p>There are two different master XLSes. One is run during a scheduled run, and another is sent to users for running in real time.</p>
+<p>Folder structure:
+S:\CORP-DAILY\rpt{time that the report runs}{report name}{spreadsheet group}{CSV files}</p>
+<p>For example:
+S:\CORP-DAILY\rpt\10am\fb-draft\rpt\allpo.csv</p>
+<p>Each spreadsheet group will have one spreadsheet. Every file in the {CSV files} folder will be put as one tab on the same spreadsheet.</p>
+<h2 id="scheduled">Scheduled</h2>
+<p>S:\CORP-DAILY\rpt\master.xls</p>
+<ul>
+<li>auto_open()<ul>
+<li>Get a list of report names to run out of rpt-list.txt. This goes in a variable called ReportNames.</li>
+<li>Each report name defines a directory to look in.</li>
+<li>For each directory, examine all sub-directories. This goes in SubFolder.</li>
+<li>For each subfolder, examine all CSV files. This goes in CSVNames.</li>
+<li>Run format_cells() for each entry in CSVNames.</li>
+<li>Each CSV file is a tab on the report.</li>
+<li>For each subfolder, save an XLS.</li>
+<li>Move all CSV files into the archive directory.</li>
+<li>Delete rpt-list.txt.</li>
+<li>Quit out of the Excel macro.</li>
+</ul>
+</li>
+<li>format_cells()<ul>
+<li>If this is a special tab (marked as “PIE CHART” or “BAR GRAPH”), pass it off to pie_chart() or bar_graph() as is appropriate.</li>
+<li>If you’re not a special tab, run normally.</li>
+<li>Set the borders.</li>
+<li>Examine the header cell of each column.<ul>
+<li>Apply formatting (bold text, gray background).</li>
+<li>Format the column if any formatting is specified.<ul>
+<li>“ (DATE)” – format as a date</li>
+<li>“ (INTEGER)” – format as an integer</li>
+<li>“{header};NumberFormat;{format}” – format the column with whatever is in {format}<ul>
+<li>Example: “Item Price;NumberFormat;0.0000” will apply number format “0.0000” to the column. The header will only say “Item Price” afterwards.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>For each cell, replace the text “(NEWLINE)” with an actual newline.</li>
+<li>Autofit and autofilter all cells.</li>
+</ul>
+</li>
+<li>pie_chart()<ul>
+<li>First row format:<ul>
+<li>PIE CHART,{name},{number of rows}<ul>
+<li>“PIE CHART” must be there to tell the macro that it’s a pie chart.</li>
+<li>{name} is the name of your pie chart.</li>
+<li>{number of rows} is the number of rows of data you’re sending.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Then each subsequent row must have this format:<ul>
+<li>{name},{value}<ul>
+<li>{name} is the name of the pie chart slice.</li>
+<li>{value} is the value associated with the pie chart slice.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>bar_graph()<ul>
+<li>First row format:<ul>
+<li>BAR GRAPH,{name},{number of rows},{special},”DATA LABELS”<ul>
+<li>“BAR GRAPH” must be there to tell the macro that it’s a bar graph.</li>
+<li>{name} is the name of your bar graph.</li>
+<li>{number of rows} is the number of rows of data that you’re sending.</li>
+<li>{special} is optional. It lets you format the bar graph.<ul>
+<li>“DOUBLE BAR” – show columns clustered side by side</li>
+<li>“100% STACK” – show columns stacked on top one another to reach 100%</li>
+</ul>
+</li>
+<li>If you want data labels, you must put “DATA LABELS” in the fifth spot. This is optional.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The second row must have this format:<ul>
+<li>,{name 1},{name 2}<ul>
+<li>The first spot must be blank.</li>
+<li>{name 1} is the label of each bar.<ul>
+<li>For example: if the bars are labelled “Brazil” and “Turkey”, then {name 1} should be “Country”.</li>
+</ul>
+</li>
+<li>{name 2} is the value for each bar.<ul>
+<li>For example: if the bars show the percentage of compliance, then {name 2} should be “% compliant”.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Then each subsequent row must have this format:<ul>
+<li>{label},{value}<ul>
+<li>{label} is the name of a data point.</li>
+<li>{value} is the value for a data point.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Col_Letter()<ul>
+<li>Find the letter corresponding to a column.</li>
+</ul>
+</li>
+<li>HexToLongRGB()<ul>
+<li>Convert a hexadecimal color code to RGB.</li>
+</ul>
+</li>
+</ul>
+<h2 id="realtime">Realtime</h2>
+<p>S:\CORP-DAILY\rpt\realtime-master.xls</p>
+<p>This is the same as the scheduled XLS, except it keeps the report open so the user can read it.</p>
+<h1 id="shapiro-360">Shapiro 360</h1>
+<h2 id="report-getter">Report Getter</h2>
+<p>shapiro360/getRpt.p</p>
+<p>This program checks if you’re allowed to access a report.</p>
+<p>It also passes back any input fields for the report as defined in rpt-inp. This is so that custom-report.php can display input fields for the user to fill out. For instance, say your report has a start date and an end date; this will pass back two input fields, one for each date.</p>
+<h3 id="parameters_1">Parameters</h3>
+<ul>
+<li>Input<ul>
+<li>web-login.user-login</li>
+<li>rpt-hdr.name</li>
+</ul>
+</li>
+<li>Output<ul>
+<li>Error message</li>
+<li>Human-readable report name</li>
+<li>A temp table of user input fields</li>
+</ul>
+</li>
+</ul>
+<h2 id="php-script">PHP Script</h2>
+<p>custom-report.php</p>
+<h3 id="initialization">Initialization</h3>
+<p>A report name is passed in through $_GET[‘rpt’]. This report name is passed into the report getter in order to draw the page.</p>
+<p>The report getter gives you the title to display on the page.</p>
+<p>It also gives you the input fields to display. For each row in ttInput, it draws an input field. If it’s an integer, the page draws a number input; if it’s a date, the page draws a date picker; otherwise, the page draws a regular text input.</p>
+<h3 id="input-parameters">Input Parameters</h3>
+<p>This report reads the “rpt” GET variable. This corresponds to a value in rpt-hdr.name.</p>
+<h3 id="functions">Functions</h3>
+<ul>
+<li>JavaScript<ul>
+<li>window.addEventListener(‘load’)<ul>
+<li>Set the page name.</li>
+<li>If you have any date inputs, initialize the date picker.</li>
+</ul>
+</li>
+<li>run_rpt()<ul>
+<li>Pack up the input fields and call the report runner.</li>
+<li>This kicks off ping_file().</li>
+</ul>
+</li>
+<li>ping_file()<ul>
+<li>Check to see if your report has finished running.</li>
+<li>If it’s done, download it.</li>
+<li>If it’s not done, check again in 1 second.</li>
+<li>This uses setInterval().</li>
+<li>The report will be at https://shapiro360.shapiro.com/vdocs/reports/{user_id}<em>{report name}</em>{timestamp}.xlsx.</li>
+<li>However, ping_file() checks for a .txt file. This file is created once the .xlsx is completely written. This prevents the user from downloading a half-written spreadsheet.</li>
+<li>For big reports (Five Below All PO Report), this can run for like five minutes.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="report-runner_1">Report Runner</h2>
+<p>shapiro360/runRpt.p</p>
+<p>Take the user’s input and create rpt-inp records.</p>
+<p>Then, run the report through imp/report.p.</p>
+<p>Once that is done, call the Master PY.</p>
+<h3 id="parameters_2">Parameters</h3>
+<ul>
+<li>Input<ul>
+<li>web-login.user-login</li>
+<li>Joomla user ID</li>
+<li>rpt-hdr.name</li>
+<li>timestamp</li>
+<li>input temp-table</li>
+</ul>
+</li>
+<li>Output<ul>
+<li>Error message</li>
+<li>Location of the report<ul>
+<li>This isn’t used by the PHP script, since the web service will time out on larger reports. That’s okay, because the Progress program will continue running, even though it will never return to the PHP script.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="internal-procedures_1">Internal Procedures</h3>
+<ul>
+<li>crt-inp<ul>
+<li>This creates rpt-inp records based on data the user passed in.</li>
+<li>This scheme allows you to save the user’s input to the database so that it can be read from any program.</li>
+</ul>
+</li>
+</ul>
+<h2 id="master-py">Master PY</h2>
+<p>shapiro360/openpyxl-2.5.4/report.py</p>
+<p>This uses the Python library openpyxl.</p>
+<h3 id="input-parameters_1">Input Parameters</h3>
+<ul>
+<li>Input folder – folder to read CSVs from</li>
+<li>Output – the filename to save an XLSX into, minus the file extension</li>
+</ul>
+<h3 id="body_1">Body</h3>
+<p>Read every CSV file out of the input folder one by one.</p>
+<p>Run normal_sheet(), pie_chart(), or bar_graph() as is appropriate.</p>
+<p>Save the output XLSX.</p>
+<p>Once that’s done, save a TXT file to communicate that the XLSX is fully written.</p>
+<h3 id="functions_1">Functions</h3>
+<ul>
+<li>as_text()<ul>
+<li>Return the value of a cell as a string.</li>
+</ul>
+</li>
+<li>normal_sheet()<ul>
+<li>Process a CSV file as a normal sheet. This mirrors format_cells() from the Master XLS.</li>
+</ul>
+</li>
+<li>pie_chart()<ul>
+<li>Process a CSV as a pie chart. This mirrors pie_chart() from the Master XLS.</li>
+</ul>
+</li>
+<li>bar_graph()<ul>
+<li>Process a CSV as a bar graph. This mirrors bar_graph() from the Master XLS.</li>
+</ul>
+</li>
+</ul>
+<h1 id="scheduled-runs">Scheduled Runs</h1>
+<h2 id="rashi-6-generate-csv-files">Rashi 6: Generate .csv Files</h2>
+<ul>
+<li>The demon1 crontab runs /usr/bin/run_report_sched.sh runs on the 15th and 45th minute of each hour.</li>
+<li>That calls /usr/bin/mxp_report.pf.</li>
+<li>That calls imp/report-sched.p.</li>
+<li>imp/report-sched.p figures the time and passes it into imp/report.p.<ul>
+<li>For instance, if the time is between 7:10 AM and 7:39 AM, imp/report-sched.p will pass "8AM" to imp/report.p.</li>
+</ul>
+</li>
+</ul>
+<h2 id="schedtask-generate-xls-files">schedtask: Generate .xls Files</h2>
+<ul>
+<li>The Task Scheduler calls C:\bat\report.bat on the 15th and 45th minute of each hour.</li>
+<li>It will determine what time to run.<ul>
+<li>For instance, if the time is between 7:40 AM and 8:09 AM, it will get the time "8AM".</li>
+</ul>
+</li>
+<li>It will look for a directory according to this time.<ul>
+<li>This will be in the format: \myshapiro\dfs\corp-daily\rpt{TIME}</li>
+</ul>
+</li>
+<li>If the directory exists, and it has a master XLS and rpt-list.txt, then report.bat will run the master XLS.</li>
+</ul>
+<h2 id="rashi-6-mail-xls-files">Rashi 6: Mail .xls Files</h2>
+<ul>
+<li>The demon1 crontab runs /usr/bin/mail_report_sched.sh on the 0th and 30th minute of each hour.</li>
+<li>It will look for a mail script according to the time.<ul>
+<li>The mail script will be in this location: /usr5/dailyreports/rpt/{TIME}/send-script.sh</li>
+</ul>
+</li>
+<li>If the mail script is there, mail_report_sched.sh will run it.</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
