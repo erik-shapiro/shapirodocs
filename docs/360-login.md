@@ -3,8 +3,6 @@
 These are instructions on how to set up a 360 user. To query this information, you will need to query the MySQL database that Joomla saves into. (MySQL Workbench is nice.)
 
 1.	Log into the Shapiro 360 admin: https://shapiro360.shapiro.com/administrator
-    *	Username: admin2
-    *	Password: secret
 *	At the top, select Users -> Manage -> Add New User.
     ![](images/360-login/add-new-user.png)
 *	General tab:
