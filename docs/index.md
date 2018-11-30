@@ -71,3 +71,31 @@
 * [M+R ASN](mr-asn)
 * [New Shapiro 360 Login](360-login)
 * [Database Class](db)
+
+## Lost ISF
+
+If someone transmits an ISF, and the file gets nuked, find the ABI response using abitoday and the BL number.
+
+```
+A1303655ROBERT113018     SN                                          vvvvvvvvv
+B  1601655SN                                                         vvvvvvvvv
+SF10101ACTEI wwwwwwwwwwww           10xxxxxxxxxxxxxxx    zzzzzzzzzzzz   018
+SF15BMyyyyyyyyyyyyyyy
+SF9002   ISF ACCEPTED
+Y  1601655SN00004
+Z1303655      113018
+```
+
+* xxxxxxxxxxxxxxx - transaction number
+* yyyyyyyyyyyyyyy - BL number
+* vvvvvvvvv - batch number
+
+The user will need to create a new file and fill out the ISF module. Don't retransmit the ISF, though.
+
+Put the transaction number in a note on the new file like this:
+
+* Note type - "A"
+* Note login - "ABI"
+* Note text - "ISF ACCEPTED - " + {transaction number}
+
+And put it in isf-header.isf-trans-no.
