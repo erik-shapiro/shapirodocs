@@ -55,13 +55,15 @@
         <li class="main active"><a href="#shapiro-mis-documentation">Shapiro MIS Documentation</a></li>
             <li><a href="#ocean-insights">Ocean Insights</a></li>
             <li><a href="#ports-america">Ports America</a></li>
+            <li><a href="#document-indexing">Document Indexing</a></li>
             <li><a href="#hub-360">Hub 360</a></li>
             <li><a href="#regen-the-wsdl">Regen The WSDL</a></li>
             <li><a href="#database-changes">Database Changes</a></li>
             <li><a href="#crontab-changes">Crontab Changes</a></li>
             <li><a href="#reset-the-demons">Reset The Demons</a></li>
             <li><a href="#local-documentation-setup">Local Documentation Setup</a></li>
-            <li><a href="#reports">Reports</a></li>
+            <li><a href="#miscellaneous">Miscellaneous</a></li>
+            <li><a href="#lost-isf">Lost ISF</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -91,6 +93,7 @@
 <p><a href="https://shapiro360.shapiro.com/index.php/ports-america-response">Shapiro Response URL</a></p>
 </li>
 </ul>
+<h2 id="document-indexing"><a href="Document Indexing/about">Document Indexing</a></h2>
 <h2 id="hub-360"><a href="Hub360/about">Hub 360</a></h2>
 <ul>
 <li><a href="https://shapiro360.shapiro.com/hub360/">Shapiro Response URL</a></li>
@@ -136,10 +139,39 @@
 </li>
 <li>Please remember to do both: push to the master branch and deploy the new site. These are two distinct branches, and updating one will not update the other.</li>
 </ul>
-<h2 id="reports">Reports</h2>
+<h2 id="miscellaneous">Miscellaneous</h2>
 <ul>
+<li><a href="https://shapiro360.shapiro.com/administrator/index.php?option=com_shapiroreports&amp;c=ticket&amp;view=ticket">Tickets</a></li>
 <li><a href="report">Reports</a></li>
-</ul></div>
+<li><a href="mr-asn">M+R ASN</a></li>
+<li><a href="360-login">New Shapiro 360 Login</a></li>
+<li><a href="db">Database Class</a></li>
+</ul>
+<h2 id="lost-isf">Lost ISF</h2>
+<p>If someone transmits an ISF, and the file gets nuked, find the ABI response using abitoday and the BL number.</p>
+<pre><code>A1303655ROBERT113018     SN                                          vvvvvvvvv
+B  1601655SN                                                         vvvvvvvvv
+SF10101ACTEI wwwwwwwwwwww           10xxxxxxxxxxxxxxx    zzzzzzzzzzzz   018
+SF15BMyyyyyyyyyyyyyyy
+SF9002   ISF ACCEPTED
+Y  1601655SN00004
+Z1303655      113018
+</code></pre>
+
+<ul>
+<li>xxxxxxxxxxxxxxx - transaction number</li>
+<li>yyyyyyyyyyyyyyy - BL number</li>
+<li>vvvvvvvvv - batch number</li>
+</ul>
+<p>The user will need to create a new file and fill out the ISF module. Don't retransmit the ISF, though.</p>
+<p>Put the transaction number in a note on the new file like this:</p>
+<ul>
+<li>Note type - "A"</li>
+<li>Note login - "ABI"</li>
+<li>Note text - "ISF ACCEPTED - " + {transaction number}</li>
+</ul>
+<p>And put it in isf-header.isf-trans-no.</p>
+<p>test</p></div>
         </div>
 
         <footer class="col-md-12">
@@ -222,5 +254,5 @@
 
 <!--
 MkDocs version : 1.0.4
-Build Date UTC : 2018-11-20 21:31:43
+Build Date UTC : 2018-12-20 21:02:21
 -->

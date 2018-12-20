@@ -53,15 +53,16 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#document-hub-360">Document Hub 360</a></li>
-            <li><a href="#-overview">- Overview</a></li>
-            <li><a href="#-developer-documenation">- Developer Documenation</a></li>
-            <li><a href="#-user-guide">- User Guide</a></li>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#developers-documentation">Developer's Documentation</a></li>
+            <li><a href="#user-guide">User Guide</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
 <h1 id="document-hub-360">Document Hub 360</h1>
-<h2 id="-overview">- Overview</h2>
+<p><a href="/">&lt;&lt; back</a></p>
+<h2 id="overview">Overview</h2>
 <p>Built w/ React, the Shapiro Document Portal, aka Hub360, is a one page app that allows the user to easily download, rename, and upload documents to/from the:</p>
 <ul>
 <li>shapiro360-docs-index, </li>
@@ -70,54 +71,9 @@
 <li>customer-docs-index ( FPPI Authorization )</li>
 </ul>
 <hr />
-<h2 id="-developer-documenation">- Developer Documenation</h2>
-<h4 id="local-setup"><strong>Local Setup</strong></h4>
-<h6 id="if-you-dont-have-git-download-it-here">If you don't have Git, <a href="https://git-scm.com/downloads">download it here</a></h6>
-<pre><code>git clone //shap-exp-360pro/c$/inetpub/wwwroot/shapiro-apps/hub360repo
-</code></pre>
-
-<h6 id="youll-need-to-install-the-packagejson-to-get-the-node_modules">You'll need to install the package.json to get the Node_Modules</h6>
-<pre><code>cd hub360repo
-npm install
-</code></pre>
-
-<h6 id="spin-up-a-local-server-terminal-will-run-a-compile-everytime-you-save-a-file-and-alert-you-to-errors-keep-in-mind-at-the-time-of-writing-all-wsdl-related-calls-will-fail">Spin up a local server - Terminal will run a compile everytime you save a file and alert you to errors. Keep in mind, at the time of writing, all WSDL related calls will fail.</h6>
-<pre><code>npm start
-</code></pre>
-
-<h6 id="when-ready-to-create-a-production-build">When ready to create a production build;</h6>
-<pre><code>npm run build
-</code></pre>
-
+<h2 id="developers-documentation"><a href="../dev-documentation">Developer's Documentation</a></h2>
 <hr />
-<h2 id="-user-guide">- User Guide</h2>
-<h4 id="shapiro360scanneddocs">Shapiro360/ScannedDocs</h4>
-<p>Document Names <strong>must</strong> follow the following convention:</p>
-<pre><code>FILEID + NAME OF FILE + EXTENSION
-</code></pre>
-
-<p>ex. 2102748ImportantFile.pdf, 2102748 Important-File.pdf </p>
-<h4 id="glgtransdocs">GLG/TransDocs</h4>
-<p>Document Names <strong>must</strong> follow the following convention:</p>
-<pre><code>FILEID + NAME OF FILE + EXTENSION
-</code></pre>
-
-<p>ex. 2102748.tdocs.pdf, 2102748 - TransDocument.pdf</p>
-<h4 id="customer-docs">Customer Docs</h4>
-<p>Document Names <strong>should</strong> follow the following convention:</p>
-<pre><code>CUSTNO + NAME OF FILE + EXTENSION
-</code></pre>
-
-<p>ex. FIVEBMER POA.pdf, AirwayBill.pdf*</p>
-<h4 id="fppi-docs">FPPI Docs</h4>
-<p>Document Names <strong>should</strong> follow the following convention:</p>
-<pre><code>CUSTNO + &quot;-FPPI-&quot; + NAME OF FILE + EXTENSION
-</code></pre>
-
-<p>ex. AMTRANS-FPPI-GTS.pdf, GTS AMTRANS FPPI AUTHORIZATION.pdf**</p>
-<hr />
-<p>*Works, but we should always push for users to include an identifier in the name, in this case, the custno</p>
-<p>**Works, but we should maintain consistency in the event we need to gather these files programmatically by name.</p></div>
+<h2 id="user-guide"><a href="../user-guide">User Guide</a></h2></div>
         </div>
 
         <footer class="col-md-12">
