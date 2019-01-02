@@ -22,26 +22,6 @@
 
 ---
 
-## [Document Indexing](Document Indexing/about)
-
----
-
-## [Hub 360](Hub360/about)
-
-* [Production Site URL](https://shapiro360.shapiro.com/hub360/)
-
----
-
-## [ShapTable](ShapTable/about)
-
----
-
-## [ShapAlert](ShapAlert/about)
-
-A basic replacement of the vanilla JS alert(); function. 
-
----
-
 ## Regen The WSDL
 
 * [How to regen the WSDL](regenwsdl)
@@ -127,3 +107,29 @@ Put the transaction number in a note on the new file like this:
 * Note text - "ISF ACCEPTED - " + {transaction number}
 
 And put it in isf-header.isf-trans-no.
+
+---
+
+## [Automated Document Packages](ADP/about)
+
+---
+
+## [Document Indexing](Document Indexing/about)
+
+---
+
+## [Hub 360](Hub360/about)
+
+* [Production Site URL](https://shapiro360.shapiro.com/hub360/)
+
+---
+
+## [ShapTable](ShapTable/about)
+
+---
+
+## [ShapAlert](ShapAlert/about)
+
+A basic replacement of the vanilla JS alert(); function. 
+
+---
