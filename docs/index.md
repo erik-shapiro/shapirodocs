@@ -72,7 +72,7 @@
 
 ## Miscellaneous
 
-* [Tickets](https://shapiro360.shapiro.com/administrator/index.php?option=com_shapiroreports&c=ticket&view=ticket)
+* [Tickets](https://shapiro360.shapiro.com/tickets)
 * [Reports](report)
 * [M+R ASN](mr-asn)
 * [New Shapiro 360 Login](360-login)
