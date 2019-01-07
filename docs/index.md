@@ -72,7 +72,7 @@
 
 ## Miscellaneous
 
-* [Tickets](https://shapiro360.shapiro.com/tickets)
+* [Tickets](https://shapiro360.shapiro.com/tickets) - "git clone //shap-exp-360pro/c$/inetpub/wwwroot/shapiro-cms/ticket_repo"
 * [Reports](report)
 * [M+R ASN](mr-asn)
 * [New Shapiro 360 Login](360-login)
