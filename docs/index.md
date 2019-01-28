@@ -133,3 +133,14 @@ And put it in isf-header.isf-trans-no.
 A basic replacement of the vanilla JS alert(); function. 
 
 ---
+
+## Transform 
+
+* Server: \\Shap-exp-tform
+
+* Codes:
+
+-E: Email
+-A: Archive
+-W: Shapiro 360
+
